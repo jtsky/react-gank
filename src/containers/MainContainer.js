@@ -1,6 +1,5 @@
 import {connect} from 'react-redux';
-import Navigation from '../components/main/Navigation';
-import {changeNav} from  '../action/customAction';
+import Main from '../components/Main';
 
 //创建组件容器，可以对传入组件的props值进行过滤组合 类似于自定义中间件
 //http://cn.redux.js.org/docs/react-redux/api.html
@@ -16,8 +15,7 @@ export default connect(
      */
     (state, ownProps)=> {
         return {
-            index: state.getIn(['nav', 'index']),
-            showProgress : state.getIn(['nav', 'showProgress']),
+            modalSrc : state.getIn(['modal', 'modalSrc'])
         };
     },
     /*
@@ -31,11 +29,7 @@ export default connect(
      * mapDispatchToProps 也会被调用。
      * */
     (dispatch)=> {
-        return {
-            onHandleChange: (index)=> {
-                dispatch(changeNav({index: index}));
-            }
-        }
+        return {}
     },
     /*
      * [mergeProps(stateProps, dispatchProps, ownProps): props] (Function): 如果指定了这个参数，
@@ -56,4 +50,4 @@ export default connect(
      默认值为 false
      * */
     {},
-)(Navigation);
+)(Main);

@@ -2,17 +2,22 @@ import Immutable from 'immutable';
 
 const titles = [
     "福利",
-    "ANDROID",
-    "IOS",
-    "ALL",
+    "Android",
+    "iOS",
+    "all",
     "前端",
-    "视频",
-    "资源"];
+    "休息视频",
+    "拓展资源"];
 
 //初始化数据
 const initState = Immutable.fromJS({
     nav: {
         index: 0,
+        showProgress: 'flex',
+
+    },
+    modal: {
+        modalSrc: ''
     }
 });
 export {titles, initState} ;

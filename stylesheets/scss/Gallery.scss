@@ -1,0 +1,54 @@
+.flex-container {
+  display: -moz-box; /* Firefox */
+  display: -ms-flexbox; /* IE10 */
+  display: -webkit-box; /* Safari */
+  display: -webkit-flex; /* Chrome, WebKit */
+  display: flex;
+  width: 100%;
+}
+
+.flex-inline-container {
+  display: -moz-inline-box; /* Firefox */
+  display: -ms-inline-flexbox; /* IE10 */
+  display: -webkit-inline-flex; /* Chrome, WebKit */
+  display: inline-flex;
+  width: 100%;
+
+}
+
+$percent_width: 10% !default;
+
+.infinite {
+  width: 100%;
+  min-height: 400px;
+  height: auto !important;
+  height: 400px;
+}
+
+.column-common {
+  @extend .flex-inline-container;
+  width: $percent_width;
+  height: auto;
+  flex-direction: column;
+}
+
+$column-list:1 2 3 4 5 6 7 8 9 10;
+@each $column in $column-list {
+  .column-#{$column} {
+    @extend .column-common;
+    width: 100 / $column * 1%;
+    flex-direction: column;
+  }
+}
+
+.column-img {
+  width: 100%;
+}
+
+.modal {
+  width: 100%;
+  margin: auto 0;
+  .img {
+    width: 100%;
+  }
+}

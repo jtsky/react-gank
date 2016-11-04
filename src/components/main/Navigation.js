@@ -1,24 +1,45 @@
 import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
-
+import ContentImg from '../pager/ContentImg';
+import ContentCommon from '../pager/ContentCommon';
+import {getBrowserPlatform} from '../../util/MyUtil';
 
 const styles = {
     tab: {
         fontSize: 14,
     },
     slide: {
-        padding: 15,
-        minHeight: 100,
+        padding: 5,
+        marginLeft : 'auto',
+        marginRight : 'auto',
     },
+
 };
 
-const Navigation = ({titles, index, onHandleChange})=> {
+
+const Navigation = ({titles, index, onHandleChange, showProgress,showModal})=> {
+    let imageColumn = 4;
+    let commonColumn = 3;
+    if (getBrowserPlatform() === 'phone') {
+        imageColumn = 2;
+        commonColumn = 1;
+    }
+
     let titleRows = [];
     let pagerRows = [];
     titles.forEach((title, index)=> {
         titleRows.push(<Tab style={styles.tab} label={title} value={index} key={index}/>);
-        pagerRows.push(<div style={styles.slide} key={index}>{title}</div>)
+        if (index == 0) {
+            pagerRows.push(<div style={styles.slide} key={index}>
+                <ContentImg showProgress={showProgress} column={imageColumn} showModal={showModal}/>
+            </div>);
+        } else {
+            pagerRows.push(<div style={styles.slide} key={index}>
+                <ContentCommon  showProgress={showProgress} column={commonColumn} title={title}/>
+            </div>);
+        }
+
     });
     return (
         <div>
@@ -32,8 +53,10 @@ const Navigation = ({titles, index, onHandleChange})=> {
                 onChangeIndex={onHandleChange}>
                 {pagerRows}
             </SwipeableViews>
+
         </div>
     );
+
 };
 
 

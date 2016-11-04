@@ -1,1 +1,4 @@
 export const CHANGE_NAVIGATION= 'CHANGE_NAVIGATION';
+export const LOAD_DATA = 'LOAD_DATA';
+export const SHOW_PROGRESS = 'SHOW_PROGRESS';
+export const SHOW_MODAL = 'SHOW_MODAL';
