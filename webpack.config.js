@@ -1,17 +1,24 @@
 // 這邊使用 HtmlWebpackPlugin，將 bundle 好的 <script> 插入到 body。${__dirname} 為 ES6 語法對應到 __dirname
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
     template: `${__dirname}/src/index.html`,
     filename: 'index.html',
     inject: 'body',
 });
 
-module.exports = {
+const UglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+});
+
+var config = {
     // 檔案起始點從 entry 進入，因為是陣列所以也可以是多個檔案
     entry: [
         './src/index.js', './stylesheets/scss/Gallery.scss'
     ],
+
     // output 是放入產生出來的結果的相關參數
     output: {
         path: `${__dirname}/dist`,
@@ -41,6 +48,7 @@ module.exports = {
             //.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理
             {test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
         ],
+        noParse: [],
     },
     // devServer 則是 webpack-dev-server 設定
     devServer: {
@@ -49,15 +57,20 @@ module.exports = {
         host: '0.0.0.0'//设置可以通过ip访问
     },
     // plugins 放置所使用的外掛
-    plugins: [HTMLWebpackPluginConfig],
+    plugins: [HTMLWebpackPluginConfig, UglifyJsPlugin],
     //其它解决方案配置
     resolve: {
         //root: 'E:/NodeProject/express_gank/public', //绝对路径
         extensions: ['', '.js', '.jsx', '.json', '.scss'],
-        /*alias: {
-         AppStore: 'js/stores/AppStores.js',
-         ActionType: 'js/actions/ActionType.js',
-         AppAction: 'js/actions/AppAction.js'
-         }*/
-    }
+        alias: {}
+    },
+
 };
+
+/*deps.forEach(function (dep) {
+ var depPath = path.resolve(node_modules_dir, dep);
+ config.resolve.alias[dep.split('/')[0]] = depPath;
+ config.module.noParse.push(depPath);
+ });*/
+
+module.exports = config;

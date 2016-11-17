@@ -1,9 +1,10 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-
+import FlatButton from 'material-ui/FlatButton';
 
 const Titlebar = (props)=>(
-    <AppBar title={props.title} showMenuIconButton={false}/>
+    <AppBar title={props.title} showMenuIconButton={false}
+            iconElementRight={<FlatButton label="Vue2.0版" onClick={()=>{window.open("/vue-gank.html","vue-gank");}}/>}/>
 );
 
 Titlebar.propTypes = {

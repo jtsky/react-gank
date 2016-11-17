@@ -45,7 +45,7 @@ class ContentCommon extends Component {
         let vm = this;
         let {title} = this.props;
         let page = this.state.data.length / 10 + 1;
-        fetch(`http://gank.io/api/data/${title}/10/${page}`)
+        fetch(`https://gank.io/api/data/${title}/10/${page}`)
             .then(function (response) {
                 return response.json();
             })

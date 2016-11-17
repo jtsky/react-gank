@@ -46,12 +46,11 @@ class ContentImg extends Component {
     loadItems() {
         let vm = this;
         let page = this.state.data.length / 10 + 1;
-        fetch(`http://gank.io/api/data/福利/10/${page}`)
+        fetch(`https://gank.io/api/data/福利/10/${page}`)
             .then(function (response) {
                 return response.json();
             })
             .then(function (data) {
-
                 let arrayData = [];
                 data.results.forEach((userInfo)=> {
                     userInfo.url = userInfo.url.replace('http://ww1.sinaimg.cn', 'http://ww3.sinaimg.cn');

@@ -6,9 +6,6 @@ import ContentCommon from '../pager/ContentCommon';
 import {getBrowserPlatform} from '../../util/MyUtil';
 
 const styles = {
-    tab: {
-        fontSize: 14,
-    },
     slide: {
         padding: 5,
         marginLeft : 'auto',
@@ -21,15 +18,17 @@ const styles = {
 const Navigation = ({titles, index, onHandleChange, showProgress,showModal})=> {
     let imageColumn = 4;
     let commonColumn = 3;
+    let fontSize = 16;
     if (getBrowserPlatform() === 'phone') {
         imageColumn = 2;
         commonColumn = 1;
+        fontSize = 10;
     }
 
     let titleRows = [];
     let pagerRows = [];
     titles.forEach((title, index)=> {
-        titleRows.push(<Tab style={styles.tab} label={title} value={index} key={index}/>);
+        titleRows.push(<Tab style={{fontSize : fontSize}} label={title} value={index} key={index}/>);
         if (index == 0) {
             pagerRows.push(<div style={styles.slide} key={index}>
                 <ContentImg showProgress={showProgress} column={imageColumn} showModal={showModal}/>
